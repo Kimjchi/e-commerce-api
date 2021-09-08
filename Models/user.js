@@ -14,7 +14,12 @@ const createNewUser = async ({firstName, lastName, email, password}) => {
     return db.query('insert into user_account values ($1, $2, $3, $4, $5)', [newID, ...values]);
 };
 
+const findUser = ({email}) => {
+    return db.query(`select password from user_account where email=$1`, [email]);
+};
+
 module.exports = { 
     getAllUsers,
-    createNewUser
+    createNewUser,
+    findUser
 };

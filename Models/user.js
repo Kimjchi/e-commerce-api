@@ -1,8 +1,8 @@
 // SQL queries
-const pool = require('../config');
+const db = require('../db');
 
 const getAllUsers = () => {
-    return pool.query('select * from user_account;');
+    return db.query('select * from user_account;');
 }
 
 module.exports = { getAllUsers };

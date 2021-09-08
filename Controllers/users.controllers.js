@@ -4,7 +4,7 @@ const getAll = async (req, res) => {
     await User
         .getAllUsers()
         .then(users => {
-            res.status(201).json({      
+            res.status(200).json({      
                 message:"Found",
                 data: users['rows']
             });

@@ -1,15 +1,18 @@
 const express = require('express');
-var logger = require('morgan');
+const logger = require('morgan');
 const app = express();
 const bodyParser = require('body-parser');
 
-var usersRouter = require('./routes/users.routes');
+const usersRouter = require('./routes/users.routes');
+const productsRouter = require('./routes/products.routes');
+
 
 const port = 3000;
 app.use(logger('dev'));
 app.use(bodyParser.json());
 
 app.use('/users', usersRouter);
+app.use('/products', productsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

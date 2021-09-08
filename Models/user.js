@@ -1,4 +1,3 @@
-// SQL queries
 const db = require('../db');
 
 const getAllUsers = () => {

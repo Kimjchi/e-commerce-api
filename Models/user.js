@@ -17,8 +17,26 @@ const findUser = ({email}) => {
     return db.query(`select password from user_account where email=$1`, [email]);
 };
 
+const getUserById = (id) => {
+    return db.query('select * from user_account where id=$1;', [id]);
+};
+
+const updateUser = ({firstName, lastName, email, password}, id) => {
+    const values = [firstName, lastName, email, password, id];
+    console.log(values);
+    return db.query(`update user_account set first_name=$1, last_name=$2, email=$3, password=$4 where id=$5;`, values);
+};
+
+const deleteUserById = (id) => {
+    return db.query('delete from user_account where id=$1;', [id]);
+}
+
+
 module.exports = { 
     getAllUsers,
     createNewUser,
-    findUser
+    findUser,
+    getUserById,
+    updateUser,
+    deleteUserById
 };

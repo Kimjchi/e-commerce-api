@@ -2,9 +2,32 @@ const express = require('express');
 const logger = require('morgan');
 const app = express();
 const bodyParser = require('body-parser');
+const swaggerJSDoc = require('swagger-jsdoc');
 
 const usersRouter = require('./routes/users.routes');
 const productsRouter = require('./routes/products.routes');
+
+// swagger definition
+var swaggerDefinition = {
+  info: {
+    title: 'E-commerce API',
+    version: '1.0.0',
+    description: 'Creating an e-commerce api for a codecademy course',
+  },
+  host: 'localhost:3000',
+  basePath: '/',
+};
+
+// options for the swagger docs
+var options = {
+  // import swaggerDefinitions
+  swaggerDefinition: swaggerDefinition,
+  // path to the API docs
+  apis: ['./routes/*.js'],
+};
+
+// initialize swagger-jsdoc
+var swaggerSpec = swaggerJSDoc(options);
 
 
 const port = 3000;
@@ -13,6 +36,12 @@ app.use(bodyParser.json());
 
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
+
+// serve swagger
+app.get('/swagger.json', function(req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

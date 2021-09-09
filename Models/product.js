@@ -13,13 +13,10 @@ const updateProduct = ({name, description, price}, id) => {
     return db.query(`update product set name=$1, description=$2, price=$3 where id=$4;`, values);
 };
 
-const createProduct = async ({name, description, price}) => {
+const createProduct = ({name, description, price}) => {
     const values = [name, description, price];
-    // get last ID + 1 and add it at the beginning of the values array
-    const lastId = await db.query('select id from product order by id desc limit 1;');
-    const newID = Number(lastId.rows[0]['id']) + 1;
     // insert new user
-    return db.query('insert into product values ($1, $2, $3, $4)', [newID, ...values]);
+    return db.query('insert into product (name, description, price) values ($1, $2, $3)', values);
 };
 
 const deleteProductById = (id) => {

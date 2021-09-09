@@ -30,7 +30,7 @@ var options = {
 var swaggerSpec = swaggerJSDoc(options);
 
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.use(logger('dev'));
 app.use(bodyParser.json());
 

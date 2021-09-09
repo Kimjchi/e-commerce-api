@@ -4,8 +4,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const swaggerJSDoc = require('swagger-jsdoc');
 
-const usersRouter = require('./routes/users.routes');
-const productsRouter = require('./routes/products.routes');
+const usersRouter = require('./routes/users.routes.js');
+const productsRouter = require('./routes/products.routes.js');
 
 // swagger definition
 var swaggerDefinition = {

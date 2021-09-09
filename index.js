@@ -1,8 +1,31 @@
 const express = require('express');
+const cors = require('cors');
 const logger = require('morgan');
-const app = express();
 const bodyParser = require('body-parser');
 const swaggerJSDoc = require('swagger-jsdoc');
+const helmet = require('helmet');
+const compression = require('compression');
+const rateLimit = require('express-rate-limit');
+const { body, check } = require('express-validator');
+
+const app = express();
+
+app.use(compression());
+app.use(helmet());
+
+const isProduction = process.env.NODE_ENV === 'production';
+const origin = {
+  origin: isProduction ? 'https://e-commerce-jeremy.herokuapp.com' : '*',
+};
+
+app.use(cors(origin));
+
+const limiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 10, // 10 requests,
+});
+
+app.use(limiter);
 
 const usersRouter = require('./Routes/users.routes');
 const productsRouter = require('./Routes/products.routes');

@@ -37,6 +37,10 @@ app.use(bodyParser.json());
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
 
+app.get('/', (req, res) => {
+  res.send('Welcome to the e-commerce api by Jérémy. Visit my github to see the routes available: https://github.com/Kimjchi/e-commerce-api');
+});
+
 // serve swagger
 app.get('/swagger.json', function(req, res) {
   res.setHeader('Content-Type', 'application/json');
@@ -44,18 +48,19 @@ app.get('/swagger.json', function(req, res) {
 });
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    res.status(err.status || 404).json({
-      message: "No such route exists"
-    })
-  });
+app.use(function(err, req, res, next) {
+  console.error(err.message);
+  res.status(err.status || 404).json({
+    message: "No such route exists"
+  })
+});
   
-  // error handler
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500).json({
-      message: err.message
-    })
-  });
+// error handler
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500).json({
+    message: err.message
+  })
+});
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

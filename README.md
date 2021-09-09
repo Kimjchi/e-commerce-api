@@ -15,7 +15,7 @@ Once you have the project downloaded, you'll need to run some terminal commands 
 
 ### API Routes
 
-- The routes live inside the **routes** folder. 
+- The routes live inside the **routes** folder.
 - The database connection lives in **db/index.js**. For the first run, you can use the command `psql -U <YOUR_USER> -d <YOUR_DB_NAME> -a -f init.sql` to create the database locally and seed it. Don't forget to change the **.env** file for your local connection.
 
 #### Existing routes

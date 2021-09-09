@@ -147,7 +147,7 @@ const deleteUser = async (req, res) => {
             .deleteUserById(id)
             .then(data => {
                 if (data.rowCount > 0) {
-                    res.status(203).json({       
+                    res.status(200).json({       
                         message: "Deleted" 
                     });
                 } else {

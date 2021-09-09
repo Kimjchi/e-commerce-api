@@ -112,7 +112,7 @@ const deleteProduct = async (req, res) => {
         .deleteProductById(id)
         .then(data => {
             if (data.rowCount > 0) {
-                res.status(203).json({       
+                res.status(200).json({       
                     message: "Deleted" 
                 });
             } else {
